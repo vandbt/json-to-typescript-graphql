@@ -1,1 +1,1 @@
-module.exports = require('./def');
+module.exports = require('./def-typescript');
