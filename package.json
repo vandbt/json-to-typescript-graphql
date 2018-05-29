@@ -1,6 +1,6 @@
 {
   "name": "json-to-typescript-graphql",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Generate Typescript GraphQL query schema and MongoDB models from JSON data",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "json",
     "relay"
   ],
-  "author": "",
+  "author": "vandbt",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/vandbt/json-to-typescript-graphql/issues"
