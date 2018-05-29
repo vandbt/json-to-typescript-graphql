@@ -1,0 +1,32 @@
+{
+  "name": "json-gql",
+  "version": "0.0.3",
+  "description": "Generate GraphQL query schema and MongoDB models from JSON data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magnifi/json-gql.git"
+  },
+  "keywords": [
+    "graphql",
+    "json",
+    "relay"
+  ],
+  "author": "Mohamed",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/magnifi/json-gql/issues"
+  },
+  "homepage": "https://github.com/magnifi/json-gql#readme",
+  "dependencies": {
+    "ansicolors": "^0.3.2",
+    "cardinal": "^1.0.0",
+    "js-beautify": "^1.6.8",
+    "lodash": "^4.17.4",
+    "lodash-inflection": "^1.5.0"
+  }
+}
