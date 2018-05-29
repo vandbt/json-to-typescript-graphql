@@ -1,7 +1,7 @@
 {
-  "name": "json-gql",
-  "version": "0.0.3",
-  "description": "Generate GraphQL query schema and MongoDB models from JSON data",
+  "name": "json-to-typescript-graphql",
+  "version": "0.0.1",
+  "description": "Generate Typescript GraphQL query schema and MongoDB models from JSON data",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,19 +9,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/magnifi/json-gql.git"
+    "url": "git+https://github.com/vandbt/json-to-typescript-graphql"
   },
   "keywords": [
     "graphql",
+    "typescript",
     "json",
     "relay"
   ],
-  "author": "Mohamed",
+  "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/magnifi/json-gql/issues"
+    "url": "https://github.com/vandbt/json-to-typescript-graphql/issues"
   },
-  "homepage": "https://github.com/magnifi/json-gql#readme",
+  "homepage": "https://github.com/vandbt/json-to-typescript-graphql#readme",
   "dependencies": {
     "ansicolors": "^0.3.2",
     "cardinal": "^1.0.0",
