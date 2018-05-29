@@ -1,6 +1,7 @@
 const {
   camelCase,
   capitalize,
+  upperFirst,
   isInteger,
   isNumber,
   isString,
@@ -30,6 +31,11 @@ function getType(t) {
   if(t.match(/(^.+?Type)|(GraphQLList)/)) return t;
   return camelCase(__.singularize(t) + '-type');
 }
+
+function getPascalTypeName(t) {
+  return upperFirst(camelCase(__.singularize(t)));
+}
+
 function getResolvedName(t) {
   let newName = camelCase(t);
   if(newName !== t) return newName;
@@ -51,6 +57,7 @@ function getGraphQLType(s) {
 }
 class Defs {
   constructor() {
+    this.rootTypeName;
     this._types = {};
     this._queryDefs = [];
     this.typeDefs = [];
@@ -58,6 +65,7 @@ class Defs {
     this.defs = '';
     /* TODO Add mutation types */
     this.hasMutation = false;
+
 
     this.exports = `
     const queryType = new GraphQLObjectType({
@@ -73,6 +81,7 @@ class Defs {
   }
   __define(type, obj, map, path) {
     path = path || [type];
+    this.rootTypeName = type;
     const typeName = getType(type);
     if(this._types[typeName]) return;
     let dbCode = `
@@ -149,10 +158,17 @@ class Defs {
     }
     this.exports += `})});
 
-    export const ${getType(typeName)}Query = new GraphQLSchema({
+    export const ${getType(this.rootTypeName)}Query = new GraphQLSchema({
       query: queryType,
       ${this.hasMutation ? 'mutation: mutationType' : ''}
     });
+    
+    export const ${getPascalTypeName(this.rootTypeName)}Schema = {
+      query: queryType,
+      ${this.hasMutation ? 'mutation: mutationType,' : ''}
+      types: [${getType(this.rootTypeName)}]
+    };
+
     `
     this._dbCode += `
     module.exports = {
