@@ -64,12 +64,18 @@ class Defs {
     this.header = GQL_IMPORTS;
     this.defs = '';
     /* TODO Add mutation types */
-    this.hasMutation = false;
+    this.hasMutation = true;
 
 
     this.exports = `
     const queryType = new GraphQLObjectType({
       name: 'query',
+      fields: () => ({
+    `;
+
+    this.mutations = `
+    const mutationType = new GraphQLObjectType({
+      name: 'mutation',
       fields: () => ({
     `;
 
@@ -120,6 +126,8 @@ class Defs {
         const graphType = getGraphQLType(val);
         code += `type: ${graphType}`;
       }
+      code += `,
+      description: 'The description'`;
       if(needResolve && !(opts && opts.resolve)) code += `,
       resolve: (${typeName}) => ${typeName}.${k}
       `;
@@ -155,19 +163,22 @@ class Defs {
           ${resolver}
           },
       `;
+
+      this.mutations += ` ${typeName}: {
+          type: ${getType(typeName)},
+          ${argsDef}
+          ${resolver}
+          },
+      `;
     }
     this.exports += `})});
-
-    export const ${getType(this.rootTypeName)}Query = new GraphQLSchema({
-      query: queryType,
-      ${this.hasMutation ? 'mutation: mutationType' : ''}
-    });
+    ${this.mutations} })});
     
     export const ${getPascalTypeName(this.rootTypeName)}Schema = {
       query: queryType,
       ${this.hasMutation ? 'mutation: mutationType,' : ''}
       types: [${getType(this.rootTypeName)}]
-    };
+    }
 
     `
     this._dbCode += `
